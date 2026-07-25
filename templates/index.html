@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>تنافس | منصة تقنيات التخدير والعناية المركزة</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -10,29 +10,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <style>
-        body { font-family: 'Cairo', sans-serif; }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            -webkit-text-size-adjust: 100%;
+        }
         .name-shadow {
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 0, 0, 0.6);
         }
+        /* تحسينات إضافية لتوافق قياسات الشاشات المختلفة (آيفون، أندرويد، آيباد) */
+        @media screen and (max-width: 768px) {
+            .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-xl, .max-w-lg {
+                width: 100% !important;
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+        }
     </style>
 </head>
-<body class="bg-[#0B0F19] text-slate-100 min-h-screen">
+<body class="bg-[#0B0F19] text-slate-100 min-h-screen overflow-x-hidden">
 
     <!-- شريط التنقل العلوي -->
     <header class="bg-[#0F172A] border-b border-slate-800 sticky top-0 z-50 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="switchSection('home')">
                 <div class="bg-sky-500 text-[#0B0F19] font-900 px-3 py-1.5 rounded-xl text-xl shadow-[0_0_15px_rgba(56,189,248,0.4)]">ت</div>
-                <span class="text-xl font-bold tracking-wide text-sky-400">تنافس <span class="text-xs text-slate-400 font-normal">| Tanafus</span></span>
+                <span class="text-lg md:text-xl font-bold tracking-wide text-sky-400">تنافس <span class="text-xs text-slate-400 font-normal">| Tanafus</span></span>
             </div>
             
             <!-- قائمة التنقل المحدثة -->
-            <nav id="navbar-links" class="hidden md:flex space-x-6 space-x-reverse text-sm font-medium">
+            <nav id="navbar-links" class="hidden md:flex space-x-4 lg:space-x-6 space-x-reverse text-sm font-medium">
                 <!-- سيتم تعبئتها ديناميكياً بواسطة JavaScript -->
             </nav>
 
             <div id="auth-nav-action">
-                <button onclick="switchSection('auth-section')" id="nav-auth-btn" class="bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold px-4 py-2 rounded-xl text-sm transition shadow-[0_0_10px_rgba(56,189,248,0.3)]">
+                <button onclick="switchSection('auth-section')" id="nav-auth-btn" class="bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold px-3 md:px-4 py-2 rounded-xl text-xs md:text-sm transition shadow-[0_0_10px_rgba(56,189,248,0.3)]">
                     انضم للمنافسة
                 </button>
             </div>
@@ -40,41 +51,41 @@
     </header>
 
     <!-- إشعار المنصة العام -->
-    <div id="global-announcement-banner" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-3 text-center text-sm font-bold shadow-md hidden flex justify-center items-center gap-4">
+    <div id="global-announcement-banner" class="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-3 text-center text-xs md:text-sm font-bold shadow-md hidden flex flex-col md:flex-row justify-center items-center gap-3">
         <span id="announcement-text">⚠️ تنبيه مهم من إدارة المنصة</span>
         <button onclick="dismissAnnouncement()" class="bg-black/30 hover:bg-black/50 px-3 py-1 rounded text-xs transition">فهمت / إخفاء</button>
     </div>
 
     <!-- القسم الرئيسي (الرئيسية) -->
-    <section id="home-section" class="max-w-7xl mx-auto px-4 py-16 text-center">
-        <div class="inline-block bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs px-4 py-1.5 rounded-full mb-6 font-semibold">
+    <section id="home-section" class="max-w-7xl mx-auto px-4 py-12 md:py-16 text-center">
+        <div class="inline-block bg-sky-500/10 border border-sky-500/30 text-sky-400 text-[11px] md:text-xs px-3 md:px-4 py-1.5 rounded-full mb-6 font-semibold">
             🚀 المنصة الأولى لطلاب وخريجي تخدير وعناية مركزة في العراق
         </div>
-        <h1 class="text-4xl md:text-6xl font-900 mb-6 leading-tight">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-900 mb-6 leading-tight">
             وثق عملياتك، انشر محتواك، وتصدر <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">قائمة التنافس</span>
         </h1>
-        <p class="text-slate-400 max-w-2xl mx-auto text-base md:text-lg mb-10">
+        <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-lg mb-10 leading-relaxed">
             سجل عملياتك الجراحية، شارك منشوراتك وصورك مع زملائك، ونافس في جميع الجامعات العراقية.
         </p>
-        <div class="flex justify-center gap-4">
-            <button onclick="switchSection('auth-section')" id="hero-cta-btn" class="bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold px-8 py-3.5 rounded-xl shadow-[0_0_20px_rgba(56,189,248,0.4)] transition cursor-pointer">
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button onclick="switchSection('auth-section')" id="hero-cta-btn" class="bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold px-6 md:px-8 py-3.5 rounded-xl shadow-[0_0_20px_rgba(56,189,248,0.4)] transition text-sm md:text-base cursor-pointer">
                 أنشئ حسابك أو سجل دخولك
             </button>
-            <button onclick="switchSection('leaderboard-section')" class="bg-[#1E293B] hover:bg-slate-700 text-slate-200 font-bold px-8 py-3.5 rounded-xl border border-slate-700 transition cursor-pointer">
+            <button onclick="switchSection('leaderboard-section')" class="bg-[#1E293B] hover:bg-slate-700 text-slate-200 font-bold px-6 md:px-8 py-3.5 rounded-xl border border-slate-700 transition text-sm md:text-base cursor-pointer">
                 عرض المتصدرين 🏆
             </button>
         </div>
     </section>
 
     <!-- تبويب المنشورات العامة -->
-    <section id="posts-section" class="max-w-4xl mx-auto px-4 py-12 hidden">
-        <div class="bg-[#1E293B]/60 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md">
-            <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+    <section id="posts-section" class="max-w-4xl mx-auto px-4 py-8 md:py-12 hidden">
+        <div class="bg-[#1E293B]/60 border border-slate-800 rounded-2xl p-4 md:p-6 shadow-xl backdrop-blur-md">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b border-slate-700 pb-4 gap-4">
                 <div>
-                    <h2 class="text-xl font-bold flex items-center gap-2 text-sky-400"><span>🌐</span> منشورات الطلاب والعام</h2>
+                    <h2 class="text-lg md:text-xl font-bold flex items-center gap-2 text-sky-400"><span>🌐</span> منشورات الطلاب والعام</h2>
                     <p class="text-xs text-slate-400 mt-1">تصفح أحدث منشورات ومشاركات الزملاء في مختلف الجامعات</p>
                 </div>
-                <button onclick="openPostModal()" class="bg-sky-600 hover:bg-sky-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(56,189,248,0.4)] transition flex items-center gap-1.5 cursor-pointer">
+                <button onclick="openPostModal()" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(56,189,248,0.4)] transition flex items-center justify-center gap-1.5 cursor-pointer">
                     <span>✏️</span> نشر بوست جديد
                 </button>
             </div>
@@ -85,76 +96,76 @@
     </section>
 
     <!-- تبويب البروفايل الشخصي (بروفايلي) -->
-    <section id="user-profile-section" class="max-w-4xl mx-auto px-4 py-8 hidden">
+    <section id="user-profile-section" class="max-w-4xl mx-auto px-4 py-6 md:py-8 hidden">
         <div class="bg-[#1E293B]/80 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md relative">
             <div class="absolute top-4 right-4 flex gap-2 z-20">
-                <button onclick="openPostModal()" class="bg-sky-600 hover:bg-sky-500 text-white px-4 h-12 rounded-full flex items-center justify-center text-xs font-bold shadow-[0_0_20px_rgba(56,189,248,0.5)] transition cursor-pointer gap-1" title="نشر بوست جديد">
-                    <span>✏️</span> نشر بوست
+                <button onclick="openPostModal()" class="bg-sky-600 hover:bg-sky-500 text-white px-3 md:px-4 h-10 md:h-12 rounded-full flex items-center justify-center text-xs font-bold shadow-[0_0_20px_rgba(56,189,248,0.5)] transition cursor-pointer gap-1" title="نشر بوست جديد">
+                    <span>✏️</span> <span class="hidden sm:inline">نشر بوست</span>
                 </button>
-                <button onclick="openCaseModal()" class="bg-red-600 hover:bg-red-500 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold shadow-[0_0_20px_rgba(220,38,38,0.6)] transition cursor-pointer" title="توثيق عملية جديدة">
+                <button onclick="openCaseModal()" class="bg-red-600 hover:bg-red-500 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-xl md:text-2xl font-bold shadow-[0_0_20px_rgba(220,38,38,0.6)] transition cursor-pointer" title="توثيق عملية جديدة">
                     +
                 </button>
             </div>
-            <div id="profile-banner-container" class="h-48 bg-gradient-to-r from-sky-600 to-blue-800 relative bg-cover bg-center">
+            <div id="profile-banner-container" class="h-36 md:h-48 bg-gradient-to-r from-sky-600 to-blue-800 relative bg-cover bg-center">
                 <div class="absolute inset-0 bg-black/30"></div>
             </div>
-            <div class="px-6 pb-6 relative">
-                <div class="flex justify-between items-end -mt-16 mb-4">
-                    <div class="flex items-end gap-4">
-                        <img id="profile-avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop" class="w-28 h-28 rounded-full object-cover border-4 border-[#0B0F19] shadow-xl bg-slate-800">
+            <div class="px-4 md:px-6 pb-6 relative">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end -mt-14 mb-4 gap-4">
+                    <div class="flex items-end gap-3 md:gap-4">
+                        <img id="profile-avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-[#0B0F19] shadow-xl bg-slate-800">
                         <div class="mb-2">
-                            <div class="flex items-center gap-2">
-                                <h2 id="profile-display-name" class="text-2xl font-bold text-white name-shadow">اسم الطالب</h2>
-                                <span id="profile-verified-badge" class="hidden text-sky-400 text-lg name-shadow" title="حساب موثق رسمياً">✓</span>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h2 id="profile-display-name" class="text-xl md:text-2xl font-bold text-white name-shadow">اسم الطالب</h2>
+                                <span id="profile-verified-badge" class="hidden text-sky-400 text-base md:text-lg name-shadow" title="حساب موثق رسمياً">✓</span>
                                 <span id="profile-admin-badge" class="hidden bg-amber-500 text-[#0B0F19] text-xs font-bold px-2 py-0.5 rounded shadow">أدمن</span>
                             </div>
-                            <p id="profile-display-username" class="text-sm text-sky-400 font-semibold drop-shadow">@username</p>
+                            <p id="profile-display-username" class="text-xs md:text-sm text-sky-400 font-semibold drop-shadow">@username</p>
                             
                             <!-- أيقونات وسائل التواصل الاجتماعي -->
-                            <div id="profile-social-links" class="flex items-center gap-3 mt-2"></div>
+                            <div id="profile-social-links" class="flex items-center gap-2 md:gap-3 mt-2 flex-wrap"></div>
 
                             <!-- عداد النقاط، العمليات، وحالات العناية المركزة -->
                             <div class="flex flex-wrap gap-2 mt-2">
-                                <span id="profile-display-points" class="bg-sky-500/20 text-sky-400 font-bold text-xs px-2.5 py-1 rounded-lg border border-sky-500/30">0 نقطة</span>
-                                <span id="profile-display-ops" class="bg-blue-500/20 text-blue-300 font-bold text-xs px-2.5 py-1 rounded-lg border border-blue-500/30">0 عمليات</span>
-                                <span id="profile-display-icus" class="bg-purple-500/20 text-purple-300 font-bold text-xs px-2.5 py-1 rounded-lg border border-purple-500/30">0 حالات ICU</span>
+                                <span id="profile-display-points" class="bg-sky-500/20 text-sky-400 font-bold text-[11px] md:text-xs px-2.5 py-1 rounded-lg border border-sky-500/30">0 نقطة</span>
+                                <span id="profile-display-ops" class="bg-blue-500/20 text-blue-300 font-bold text-[11px] md:text-xs px-2.5 py-1 rounded-lg border border-blue-500/30">0 عمليات</span>
+                                <span id="profile-display-icus" class="bg-purple-500/20 text-purple-300 font-bold text-[11px] md:text-xs px-2.5 py-1 rounded-lg border border-purple-500/30">0 حالات ICU</span>
                             </div>
                         </div>
                     </div>
-                    <button onclick="toggleEditMode()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-bold px-4 py-2 rounded-xl transition cursor-pointer">
+                    <button onclick="toggleEditMode()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-bold px-4 py-2 rounded-xl transition cursor-pointer w-full sm:w-auto">
                         ⚙️ تعديل البروفايل
                     </button>
                 </div>
-                <p id="profile-display-bio" class="text-slate-300 text-sm mb-6 bg-[#0B0F19]/50 p-3 rounded-xl border border-slate-800">
+                <p id="profile-display-bio" class="text-slate-300 text-xs md:text-sm mb-6 bg-[#0B0F19]/50 p-3 rounded-xl border border-slate-800 leading-relaxed">
                     لم تتم إضافة نبذة تعريفية بعد...
                 </p>
-                <div id="edit-profile-box" class="hidden bg-[#0B0F19] p-5 rounded-xl border border-slate-800 mb-6 space-y-4">
+                <div id="edit-profile-box" class="hidden bg-[#0B0F19] p-4 md:p-5 rounded-xl border border-slate-800 mb-6 space-y-4">
                     <h3 class="text-sm font-bold text-sky-400">تعديل معلومات البروفايل وحسابات التواصل</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">صورة البروفايل الدائرية (مع خاصية القص والتحريك)</label>
+                            <label class="block text-xs text-slate-400 mb-1">صورة البروفايل الدائرية</label>
                             <input type="file" id="edit-avatar-file" accept="image/*" onchange="initCropper(event, 'avatar')" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-300 file:bg-sky-500 file:text-[#0B0F19] file:border-0 file:rounded-md file:px-2 file:py-1 file:font-bold cursor-pointer">
                         </div>
                         <div>
-                            <label class="block text-xs text-slate-400 mb-1">صورة الغلاف البنر (مع خاصية القص والتحريك)</label>
+                            <label class="block text-xs text-slate-400 mb-1">صورة الغلاف البنر</label>
                             <input type="file" id="edit-banner-file" accept="image/*" onchange="initCropper(event, 'banner')" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-300 file:bg-sky-500 file:text-[#0B0F19] file:border-0 file:rounded-md file:px-2 file:py-1 file:font-bold cursor-pointer">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs text-slate-400 mb-1">رابط أو معرف التليجرام (Telegram)</label>
-                            <input type="text" id="edit-telegram-input" placeholder="https://t.me/username أو username" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                            <input type="text" id="edit-telegram-input" placeholder="username" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
                         </div>
                         <div>
                             <label class="block text-xs text-slate-400 mb-1">رابط أو معرف الانستغرام (Instagram)</label>
-                            <input type="text" id="edit-instagram-input" placeholder="https://instagram.com/username أو username" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                            <input type="text" id="edit-instagram-input" placeholder="username" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
                         </div>
                     </div>
                     <div>
                         <label class="block text-xs text-slate-400 mb-1">البايو (النبذة التعريفية)</label>
                         <textarea id="edit-bio-input" rows="2" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white"></textarea>
                     </div>
-                    <button onclick="saveProfileChangesDirect()" class="bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold px-5 py-2 rounded-lg text-sm transition cursor-pointer">
+                    <button onclick="saveProfileChangesDirect()" class="w-full sm:w-auto bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold px-5 py-2 rounded-lg text-sm transition cursor-pointer">
                         حفظ التعديلات
                     </button>
                 </div>
@@ -167,32 +178,32 @@
     </section>
 
     <!-- نافذة قص وتعديل الصور (Cropper Modal) -->
-    <div id="cropper-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-[#1E293B] border border-slate-700 rounded-2xl max-w-xl w-full p-6 shadow-2xl relative flex flex-col items-center">
-            <h3 id="cropper-modal-title" class="text-base font-bold text-sky-400 mb-3">قص وترتيب الصورة</h3>
-            <p class="text-xs text-slate-400 mb-4 text-center">قم بتحريك الصورة أو تكبيرها لتناسب الإطار المطلوب تماماً كما في التطبيقات الكبرى</p>
-            <div class="w-full max-h-[60vh] overflow-hidden bg-black/50 rounded-xl mb-4 flex justify-center items-center">
+    <div id="cropper-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 md:p-4">
+        <div class="bg-[#1E293B] border border-slate-700 rounded-2xl max-w-xl w-full p-4 md:p-6 shadow-2xl relative flex flex-col items-center">
+            <h3 id="cropper-modal-title" class="text-sm md:text-base font-bold text-sky-400 mb-2 text-center">قص وترتيب الصورة</h3>
+            <p class="text-[11px] md:text-xs text-slate-400 mb-3 text-center">قم بتحريك الصورة أو تكبيرها لتناسب الإطار المطلوب تماماً</p>
+            <div class="w-full max-h-[50vh] overflow-hidden bg-black/50 rounded-xl mb-4 flex justify-center items-center">
                 <img id="cropper-image-element" class="max-w-full block">
             </div>
-            <div class="flex gap-3 w-full">
-                <button onclick="applyCrop()" class="flex-1 bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold py-2.5 rounded-xl text-sm transition cursor-pointer">قص واعتماد الصورة ✓</button>
-                <button onclick="closeCropperModal()" class="px-5 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-2.5 rounded-xl text-sm transition cursor-pointer">إلغاء</button>
+            <div class="flex flex-col sm:flex-row gap-3 w-full">
+                <button onclick="applyCrop()" class="w-full sm:flex-1 bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold py-2.5 rounded-xl text-xs md:text-sm transition cursor-pointer">قص واعتماد الصورة ✓</button>
+                <button onclick="closeCropperModal()" class="w-full sm:w-auto px-5 bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-2.5 rounded-xl text-xs md:text-sm transition cursor-pointer">إلغاء</button>
             </div>
         </div>
     </div>
 
     <!-- تبويب لوحة تحكم الأدمن المركزية -->
-    <section id="admin-section" class="max-w-6xl mx-auto px-4 py-12 hidden">
-        <div class="bg-[#1E293B] border-2 border-amber-500/50 rounded-2xl p-6 md:p-8 shadow-2xl">
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-700">
-                <h2 class="text-2xl font-900 text-amber-400 flex items-center gap-3">
+    <section id="admin-section" class="max-w-6xl mx-auto px-4 py-8 md:py-12 hidden">
+        <div class="bg-[#1E293B] border-2 border-amber-500/50 rounded-2xl p-4 md:p-8 shadow-2xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-slate-700 gap-3">
+                <h2 class="text-xl md:text-2xl font-900 text-amber-400 flex items-center gap-3">
                     <span>👑</span> لوحة تحكم الأدمن المركزية
                 </h2>
-                <span class="bg-amber-500/20 text-amber-400 text-xs px-3 py-1 rounded-full font-bold">صلاحيات كاملة + عرض صور الحالات السرية</span>
+                <span class="bg-amber-500/20 text-amber-400 text-[11px] md:text-xs px-3 py-1 rounded-full font-bold">صلاحيات كاملة + عرض صور الحالات السرية</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-[#0B0F19] p-5 rounded-xl border border-slate-800 space-y-4">
+                <div class="bg-[#0B0F19] p-4 md:p-5 rounded-xl border border-slate-800 space-y-4">
                     <h3 class="font-bold text-sky-400 text-sm flex items-center gap-2"><span>📢</span> إرسال إشعار للجميع</h3>
                     <p class="text-xs text-slate-400">هذا الإشعار سيظهر لكل الطلاب عند تسجيل دخولهم.</p>
                     <textarea id="admin-announcement-input" rows="3" placeholder="اكتب نص التنبيه أو الإعلان هنا..." class="w-full bg-[#1E293B] border border-slate-700 rounded-lg p-2.5 text-xs text-white"></textarea>
@@ -201,10 +212,10 @@
                     </button>
                 </div>
 
-                <div class="bg-[#0B0F19] p-5 rounded-xl border border-slate-800 space-y-4 md:col-span-2">
+                <div class="bg-[#0B0F19] p-4 md:p-5 rounded-xl border border-slate-800 space-y-4 md:col-span-2">
                     <h3 class="font-bold text-sky-400 text-sm flex items-center gap-2"><span>🛡️</span> إدارة الطلاب، التوثيق، وتصدير السجلات</h3>
                     <div class="overflow-x-auto max-h-64 overflow-y-auto">
-                        <table class="w-full text-right text-xs">
+                        <table class="w-full text-right text-xs whitespace-nowrap">
                             <thead>
                                 <tr class="text-slate-400 border-b border-slate-800">
                                     <th class="py-2 px-2">الطالب / المشرف</th>
@@ -222,15 +233,15 @@
     </section>
 
     <!-- قسم المصادقة (تسجيل الدخول / إنشاء حساب) -->
-    <section id="auth-section" class="max-w-3xl mx-auto px-4 py-12 hidden">
-        <div class="bg-[#1E293B]/60 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl backdrop-blur-md">
-            <div class="flex border-b border-slate-700 mb-6 pb-2 gap-4">
-                <button onclick="switchAuthTab('login')" id="tab-login-btn" class="text-lg font-bold text-sky-400 border-b-2 border-sky-400 pb-1 transition cursor-pointer">تسجيل الدخول</button>
-                <button onclick="switchAuthTab('register')" id="tab-reg-btn" class="text-lg font-bold text-slate-400 pb-1 transition cursor-pointer">انشاء حساب جديد</button>
+    <section id="auth-section" class="max-w-3xl mx-auto px-4 py-8 md:py-12 hidden">
+        <div class="bg-[#1E293B]/60 border border-slate-800 rounded-2xl p-4 md:p-8 shadow-xl backdrop-blur-md">
+            <div class="flex border-b border-slate-700 mb-6 pb-2 gap-4 overflow-x-auto">
+                <button onclick="switchAuthTab('login')" id="tab-login-btn" class="text-base md:text-lg font-bold text-sky-400 border-b-2 border-sky-400 pb-1 transition cursor-pointer whitespace-nowrap">تسجيل الدخول</button>
+                <button onclick="switchAuthTab('register')" id="tab-reg-btn" class="text-base md:text-lg font-bold text-slate-400 pb-1 transition cursor-pointer whitespace-nowrap">انشاء حساب جديد</button>
             </div>
 
-            <form id="login-form" class="space-y-5">
-                <h2 class="text-lg font-bold mb-2 flex items-center gap-2 text-white"><span>🔐</span> تسجيل الدخول إلى حسابك الموجود مسبقاً</h2>
+            <form id="login-form" class="space-y-4 md:space-y-5">
+                <h2 class="text-base md:text-lg font-bold mb-2 flex items-center gap-2 text-white"><span>🔐</span> تسجيل الدخول إلى حسابك الموجود مسبقاً</h2>
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 mb-2">البريد الإلكتروني (Gmail)</label>
                     <input type="email" id="login-email" placeholder="example@gmail.com" class="w-full bg-[#0B0F19] border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200" required>
@@ -239,11 +250,11 @@
                     <label class="block text-xs font-semibold text-slate-300 mb-2">كلمة المرور</label>
                     <input type="password" id="login-password" placeholder="••••••••" class="w-full bg-[#0B0F19] border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-200" required>
                 </div>
-                <button type="submit" class="w-full bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold py-3.5 rounded-xl transition text-base cursor-pointer">تسجيل الدخول 🚀</button>
+                <button type="submit" class="w-full bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold py-3.5 rounded-xl transition text-sm md:text-base cursor-pointer">تسجيل الدخول 🚀</button>
             </form>
 
-            <form id="register-form" class="space-y-5 hidden">
-                <h2 class="text-lg font-bold mb-2 flex items-center gap-2 text-white"><span>👤</span> أنشئ حسابك الشخصي والبروفايل</h2>
+            <form id="register-form" class="space-y-4 md:space-y-5 hidden">
+                <h2 class="text-base md:text-lg font-bold mb-2 flex items-center gap-2 text-white"><span>👤</span> أنشئ حسابك الشخصي والبروفايل</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-2">الاسم الثلاثي</label>
@@ -282,40 +293,40 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold py-3.5 rounded-xl transition text-base cursor-pointer">تسجيل الحساب وانضمام للتنافس 🚀</button>
+                <button type="submit" class="w-full bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold py-3.5 rounded-xl transition text-sm md:text-base cursor-pointer">تسجيل الحساب وانضمام للتنافس 🚀</button>
             </form>
         </div>
     </section>
 
     <!-- تبويب قائمة المتصدرين -->
-    <section id="leaderboard-section" class="max-w-5xl mx-auto px-4 py-12 hidden">
-        <div class="bg-[#1E293B]/60 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-md">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold flex items-center gap-2"><span>🏆</span> لوحة المتصدرين</h2>
-                <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-lg">محدث مباشر (النقاط تتحدد بحسب صعوبة العملية أو حالة العناية)</span>
+    <section id="leaderboard-section" class="max-w-5xl mx-auto px-4 py-8 md:py-12 hidden">
+        <div class="bg-[#1E293B]/60 border border-slate-800 rounded-2xl p-4 md:p-6 shadow-xl backdrop-blur-md">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
+                <h2 class="text-lg md:text-xl font-bold flex items-center gap-2"><span>🏆</span> لوحة المتصدرين</h2>
+                <span class="text-[11px] md:text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-lg">محدث مباشر (النقاط تتحدد بحسب الصعوبة)</span>
             </div>
             <div class="overflow-x-auto">
-                <table class="w-full text-right border-collapse">
+                <table class="w-full text-right border-collapse whitespace-nowrap">
                     <thead>
-                        <tr class="border-b border-slate-700 text-slate-400 text-sm">
-                            <th class="py-3 px-4"># المركز</th>
-                            <th class="py-3 px-4">الطالب / المشرف</th>
-                            <th class="py-3 px-4">الجامعة / المحافظة</th>
-                            <th class="py-3 px-4">المرحلة</th>
-                            <th class="py-3 px-4 text-left">النقاط</th>
+                        <tr class="border-b border-slate-700 text-slate-400 text-xs md:text-sm">
+                            <th class="py-3 px-3 md:px-4"># المركز</th>
+                            <th class="py-3 px-3 md:px-4">الطالب / المشرف</th>
+                            <th class="py-3 px-3 md:px-4">الجامعة / المحافظة</th>
+                            <th class="py-3 px-3 md:px-4">المرحلة</th>
+                            <th class="py-3 px-3 md:px-4 text-left">النقاط</th>
                         </tr>
                     </thead>
-                    <tbody id="leaderboard-body" class="divide-y divide-slate-800/60 text-sm"></tbody>
+                    <tbody id="leaderboard-body" class="divide-y divide-slate-800/60 text-xs md:text-sm"></tbody>
                 </table>
             </div>
         </div>
     </section>
 
-    <!-- نافذة نشر بوست جديد (صوري، فيديو، نصي مع هاشتاقات) -->
-    <div id="post-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-[#1E293B] border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8">
+    <!-- نافذة نشر بوست جديد -->
+    <div id="post-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 md:p-4 overflow-y-auto">
+        <div class="bg-[#1E293B] border border-slate-700 rounded-2xl max-w-lg w-full p-4 md:p-6 shadow-2xl relative my-8">
             <button onclick="closePostModal()" class="absolute top-4 left-4 bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-600 transition cursor-pointer">✕</button>
-            <h3 class="text-lg font-bold text-sky-400 mb-4 flex items-center gap-2"><span>✏️</span> إنشاء منشور جديد (صورة، فيديو، أو نص)</h3>
+            <h3 class="text-base md:text-lg font-bold text-sky-400 mb-4 flex items-center gap-2"><span>✏️</span> إنشاء منشور جديد (صورة، فيديو، أو نص)</h3>
             <form id="post-form" class="space-y-4">
                 <div>
                     <label class="block text-xs text-slate-400 mb-1">ماذا يدور في ذهنك؟ (اكتب نصك والهاشتاقات هنا #تخدير)</label>
@@ -331,10 +342,10 @@
     </div>
 
     <!-- نافذة توثيق العمليات والحالات المحسنة -->
-    <div id="case-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-[#1E293B] border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative my-8">
+    <div id="case-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 md:p-4 overflow-y-auto">
+        <div class="bg-[#1E293B] border border-slate-700 rounded-2xl max-w-2xl w-full p-4 md:p-6 shadow-2xl relative my-8">
             <button onclick="closeCaseModal()" class="absolute top-4 left-4 bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-600 transition cursor-pointer">✕</button>
-            <h3 class="text-lg font-bold text-sky-400 mb-4 flex items-center gap-2"><span>🩺</span> توثيق عملية أو حالة عناية مركزة (تحديد تلقائي للنقاط)</h3>
+            <h3 class="text-base md:text-lg font-bold text-sky-400 mb-4 flex items-center gap-2"><span>🩺</span> توثيق عملية أو حالة عناية مركزة</h3>
             <form id="case-form" class="space-y-4">
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -430,11 +441,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs text-slate-400 mb-1">أدوية التخدير المستخدمة</label>
-                            <input type="text" id="case-anesthetic-drugs" placeholder="Propofol, Fentanyl, Ketamine" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                            <input type="text" id="case-anesthetic-drugs" placeholder="Propofol, Fentanyl" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
                         </div>
                         <div>
                             <label class="block text-xs text-slate-400 mb-1">المرخيات العضلية المستخدمة</label>
-                            <input type="text" id="case-muscle-relaxants" placeholder="Rocuronium, Succinylcholine" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                            <input type="text" id="case-muscle-relaxants" placeholder="Rocuronium" class="w-full bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
                         </div>
                     </div>
 
@@ -462,7 +473,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div><label class="block text-xs text-slate-400 mb-1">أدوية أخرى / طوارئ</label><input type="text" id="case-drugs" placeholder="Atropine, Ephedrine" class="w-full bg-[#0B0F19] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white"></div>
+                    <div><label class="block text-xs text-slate-400 mb-1">أدوية أخرى / طوارئ</label><input type="text" id="case-drugs" placeholder="Atropine" class="w-full bg-[#0B0F19] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white"></div>
                     <div>
                         <label class="block text-xs text-slate-400 mb-1">رفع صورة الحالة / التقرير (سرية للأدمن فقط)</label>
                         <input type="file" id="case-image-file" accept="image/*" class="w-full bg-[#0B0F19] border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-300 file:bg-sky-500 file:text-[#0B0F19] file:border-0 file:rounded-md file:px-2 file:py-1 file:font-bold cursor-pointer">
@@ -476,21 +487,21 @@
     </div>
 
     <!-- نافذة بروفايل الزائر -->
-    <div id="visitor-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div id="visitor-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 md:p-4">
         <div class="bg-[#1E293B] border border-slate-700 rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeVisitorModal()" class="absolute top-4 left-4 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-600 transition z-10 cursor-pointer">✕</button>
-            <div id="modal-banner" class="h-36 bg-gradient-to-r from-sky-600 to-blue-800 bg-cover bg-center relative"></div>
-            <div class="p-6 relative">
-                <div class="flex items-end gap-4 -mt-14 mb-3">
-                    <img id="modal-avatar" src="" class="w-20 h-20 rounded-full object-cover border-4 border-[#1E293B] bg-slate-800 shadow-lg">
+            <div id="modal-banner" class="h-32 md:h-36 bg-gradient-to-r from-sky-600 to-blue-800 bg-cover bg-center relative"></div>
+            <div class="p-4 md:p-6 relative">
+                <div class="flex items-end gap-3 md:gap-4 -mt-14 mb-3">
+                    <img id="modal-avatar" src="" class="w-18 h-18 md:w-20 md:h-20 rounded-full object-cover border-4 border-[#1E293B] bg-slate-800 shadow-lg">
                     <div>
-                        <div class="flex items-center gap-1.5">
-                            <h3 id="modal-name" class="text-xl font-bold text-white name-shadow">اسم الطالب</h3>
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <h3 id="modal-name" class="text-lg md:text-xl font-bold text-white name-shadow">اسم الطالب</h3>
                             <span id="modal-verified-badge" class="hidden text-sky-400 text-sm name-shadow">✓</span>
                         </div>
                         <p id="modal-username" class="text-xs text-sky-400 font-semibold drop-shadow">@username</p>
                         <!-- أيقونات التواصل للزائر -->
-                        <div id="modal-social-links" class="flex items-center gap-3 mt-1.5"></div>
+                        <div id="modal-social-links" class="flex items-center gap-2 mt-1.5 flex-wrap"></div>
                     </div>
                 </div>
                 <!-- عداد النقاط، العمليات، وحالات العناية المركزة للزائر -->
@@ -503,7 +514,7 @@
                     <span id="modal-uni-prov" class="bg-slate-800 px-2.5 py-1 rounded-lg">الجامعة والمحافظة</span>
                     <span id="modal-stage" class="bg-slate-800 px-2.5 py-1 rounded-lg">المرحلة</span>
                 </div>
-                <p id="modal-bio" class="text-slate-300 text-sm bg-[#0B0F19] p-3 rounded-xl border border-slate-800 mb-4">لا توجد نبذة تعريفية...</p>
+                <p id="modal-bio" class="text-slate-300 text-xs md:text-sm bg-[#0B0F19] p-3 rounded-xl border border-slate-800 mb-4 leading-relaxed">لا توجد نبذة تعريفية...</p>
                 <h4 class="text-xs font-bold text-slate-400 mb-2">منشورات وعمليات الطالب</h4>
                 <div id="modal-posts-container" class="space-y-3"></div>
             </div>
@@ -511,7 +522,7 @@
     </div>
 
     <!-- الفوتر -->
-    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500 px-4">
         <p>جميع الحقوق محفوظة © 2026 منصة تنافس لطلاب تقنيات التخدير والعناية المركزة</p>
     </footer>
 
@@ -565,13 +576,13 @@
             if(tab === 'login') {
                 loginForm.classList.remove('hidden');
                 registerForm.classList.add('hidden');
-                loginBtn.className = "text-lg font-bold text-sky-400 border-b-2 border-sky-400 pb-1 transition cursor-pointer";
-                regBtn.className = "text-lg font-bold text-slate-400 pb-1 transition cursor-pointer";
+                loginBtn.className = "text-base md:text-lg font-bold text-sky-400 border-b-2 border-sky-400 pb-1 transition cursor-pointer whitespace-nowrap";
+                regBtn.className = "text-base md:text-lg font-bold text-slate-400 pb-1 transition cursor-pointer whitespace-nowrap";
             } else {
                 loginForm.classList.add('hidden');
                 registerForm.classList.remove('hidden');
-                regBtn.className = "text-lg font-bold text-sky-400 border-b-2 border-sky-400 pb-1 transition cursor-pointer";
-                loginBtn.className = "text-lg font-bold text-slate-400 pb-1 transition cursor-pointer";
+                regBtn.className = "text-base md:text-lg font-bold text-sky-400 border-b-2 border-sky-400 pb-1 transition cursor-pointer whitespace-nowrap";
+                loginBtn.className = "text-base md:text-lg font-bold text-slate-400 pb-1 transition cursor-pointer whitespace-nowrap";
             }
         }
 
@@ -598,7 +609,7 @@
                     <button onclick="switchSection('leaderboard-section')" class="hover:text-sky-400 transition cursor-pointer">قائمة المتصدرين</button>
                 `;
                 authActionContainer.innerHTML = `
-                    <button onclick="switchSection('auth-section'); switchAuthTab('login');" class="bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold px-4 py-2 rounded-xl text-sm transition shadow-[0_0_10px_rgba(56,189,248,0.3)] cursor-pointer">
+                    <button onclick="switchSection('auth-section'); switchAuthTab('login');" class="bg-sky-500 hover:bg-sky-400 text-[#0B0F19] font-bold px-3 md:px-4 py-2 rounded-xl text-xs md:text-sm transition shadow-[0_0_10px_rgba(56,189,248,0.3)] cursor-pointer">
                         تسجيل الدخول
                     </button>
                 `;
@@ -994,14 +1005,14 @@
 
                         container.innerHTML += `
                             <div class="bg-[#0B0F19] p-4 rounded-xl border border-slate-800 text-sm space-y-2 relative">
-                                <div class="flex justify-between items-center text-xs text-slate-400">
-                                    <div class="flex items-center gap-2">
+                                <div class="flex justify-between items-center text-xs text-slate-400 gap-2">
+                                    <div class="flex items-center gap-2 flex-wrap">
                                         <span class="bg-indigo-500/20 text-indigo-400 font-bold px-2 py-0.5 rounded">📝 منشور عام</span>
                                         ${deleteBtnHtml}
                                     </div>
-                                    <span>${new Date(post.createdAt).toLocaleString('ar-IQ')}</span>
+                                    <span class="whitespace-nowrap">${new Date(post.createdAt).toLocaleDateString('ar-IQ')}</span>
                                 </div>
-                                ${formattedText ? `<p class="text-slate-200 text-sm whitespace-pre-line leading-relaxed">${formattedText}</p>` : ''}
+                                ${formattedText ? `<p class="text-slate-200 text-xs md:text-sm whitespace-pre-line leading-relaxed">${formattedText}</p>` : ''}
                                 ${mediaHtml}
                             </div>`;
                     } else {
@@ -1019,14 +1030,14 @@
 
                         container.innerHTML += `
                             <div class="bg-[#0B0F19] p-4 rounded-xl border border-sky-500/30 text-sm space-y-2 relative">
-                                <div class="flex justify-between items-center">
-                                    <div class="flex items-center gap-2">
-                                        <span class="bg-sky-500/20 text-sky-400 font-bold px-2 py-0.5 rounded text-xs">${badgeTitle} (+${post.pointsAwarded || 10} نقطة)</span>
+                                <div class="flex justify-between items-center gap-2">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="bg-sky-500/20 text-sky-400 font-bold px-2 py-0.5 rounded text-[11px] md:text-xs">${badgeTitle} (+${post.pointsAwarded || 10} نقطة)</span>
                                         ${deleteBtnHtml}
                                     </div>
-                                    <span class="text-xs text-slate-400">${post.caseTime || ''}</span>
+                                    <span class="text-xs text-slate-400 whitespace-nowrap">${post.caseTime ? post.caseTime.replace('T', ' ') : ''}</span>
                                 </div>
-                                <div class="grid grid-cols-2 gap-2 text-xs text-slate-300">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
                                     <p>💉 التخدير: ${post.anesthesia}</p>
                                     <p>📍 المكان: ${post.location}</p>
                                     <p>🍽️ الصيام: ${post.fastingStatus || 'غير محدد'}</p>
@@ -1048,7 +1059,6 @@
                     container.innerHTML = `<p class="text-xs text-slate-500">لا توجد منشورات أو عمليات موثقة حتى الآن.</p>`;
                 }
 
-                // تحديث العدادات على البروفايل المعروض
                 document.getElementById(opsCountId).innerText = `${operationsCount} عمليات`;
                 document.getElementById(icuCountId).innerText = `${icuCasesCount} حالات ICU`;
 
@@ -1099,25 +1109,25 @@
                         }
 
                         container.innerHTML += `
-                            <div class="bg-[#0B0F19] p-5 rounded-xl border border-slate-800 space-y-3">
-                                <div class="flex justify-between items-center">
+                            <div class="bg-[#0B0F19] p-4 md:p-5 rounded-xl border border-slate-800 space-y-3">
+                                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                                     <div class="flex items-center gap-3 cursor-pointer" onclick="openVisitorProfile('${post.uid}')" title="انقر لزيارة بروفايل الطالب">
-                                        <img src="${author.avatar}" class="w-11 h-11 rounded-full object-cover border-2 border-sky-500">
+                                        <img src="${author.avatar}" class="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover border-2 border-sky-500 shrink-0">
                                         <div>
-                                            <div class="flex items-center gap-1.5">
-                                                <span class="font-bold text-white text-sm hover:text-sky-400 transition name-shadow">${author.name}</span>
+                                            <div class="flex items-center gap-1.5 flex-wrap">
+                                                <span class="font-bold text-white text-xs md:text-sm hover:text-sky-400 transition name-shadow">${author.name}</span>
                                                 ${author.verified ? '<span class="text-sky-400 text-xs name-shadow">✓</span>' : ''}
                                                 ${isAdminUser ? '<span class="bg-amber-500 text-[#0B0F19] text-[10px] font-bold px-1.5 py-0.2 rounded shadow">أدمن</span>' : ''}
                                             </div>
-                                            <span class="text-xs text-slate-400 font-semibold drop-shadow">@${author.username} • ${author.university} (${author.province})</span>
+                                            <span class="text-[11px] md:text-xs text-slate-400 font-semibold drop-shadow">@${author.username} • ${author.university} (${author.province})</span>
                                         </div>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                        <span class="text-xs text-slate-500">${new Date(post.createdAt).toLocaleString('ar-IQ')}</span>
+                                    <div class="flex items-center gap-3 text-xs text-slate-500 self-end sm:self-auto">
+                                        <span>${new Date(post.createdAt).toLocaleDateString('ar-IQ')}</span>
                                         ${deleteBtnHtml}
                                     </div>
                                 </div>
-                                ${formattedText ? `<p class="text-slate-200 text-sm whitespace-pre-line leading-relaxed pt-1">${formattedText}</p>` : ''}
+                                ${formattedText ? `<p class="text-slate-200 text-xs md:text-sm whitespace-pre-line leading-relaxed pt-1">${formattedText}</p>` : ''}
                                 ${mediaHtml}
                             </div>
                         `;
@@ -1146,23 +1156,23 @@
                     let isAdminUser = ADMIN_EMAILS.includes(data.email);
                     tbody.innerHTML += `
                         <tr class="hover:bg-slate-800/40 transition cursor-pointer" onclick="openVisitorProfile('${data.uid}')">
-                            <td class="py-4 px-4 font-bold text-amber-400">${medal}</td>
-                            <td class="py-4 px-4">
+                            <td class="py-3 md:py-4 px-3 md:px-4 font-bold text-amber-400">${medal}</td>
+                            <td class="py-3 md:py-4 px-3 md:px-4">
                                 <div class="flex items-center gap-3">
-                                    <img src="${data.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop'}" class="w-10 h-10 rounded-full object-cover border border-sky-500">
+                                    <img src="${data.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop'}" class="w-9 h-9 md:w-10 md:h-10 rounded-full object-cover border border-sky-500 shrink-0">
                                     <div>
-                                        <div class="flex items-center gap-1">
-                                            <span class="font-bold text-white block name-shadow">${data.name}</span>
+                                        <div class="flex items-center gap-1 flex-wrap">
+                                            <span class="font-bold text-white block text-xs md:text-sm name-shadow">${data.name}</span>
                                             ${data.verified ? '<span class="text-sky-400 text-xs name-shadow">✓</span>' : ''}
                                             ${isAdminUser ? '<span class="bg-amber-500 text-[#0B0F19] text-[10px] font-bold px-1.5 py-0.2 rounded shadow">أدمن</span>' : ''}
                                         </div>
-                                        <span class="text-xs text-slate-400 font-semibold drop-shadow">@${data.username}</span>
+                                        <span class="text-[11px] md:text-xs text-slate-400 font-semibold drop-shadow">@${data.username}</span>
                                     </div>
                                 </div>
                             </td>
-                            <td class="py-4 px-4 text-slate-300">${data.university} (${data.province})</td>
-                            <td class="py-4 px-4 text-slate-400">${data.stage}</td>
-                            <td class="py-4 px-4 text-left font-bold text-sky-400">${data.points || 0} نقطة</td>
+                            <td class="py-3 md:py-4 px-3 md:px-4 text-slate-300 text-xs md:text-sm">${data.university} (${data.province})</td>
+                            <td class="py-3 md:py-4 px-3 md:px-4 text-slate-400 text-xs md:text-sm">${data.stage}</td>
+                            <td class="py-3 md:py-4 px-3 md:px-4 text-left font-bold text-sky-400 text-xs md:text-sm">${data.points || 0} نقطة</td>
                         </tr>`;
                     rank++;
                 });
@@ -1222,7 +1232,7 @@
                 tbody.innerHTML = "";
                 snap.forEach(docSnap => {
                     const u = docSnap.data();
-                    let verifyBtnText = u.verified ? "إلغاء التوثيق ❌" : "منح التوثيق ✓";
+                    let verifyBtnText = u.verified ? "إلغاء ❌" : "منح التوثيق ✓";
                     let verifyBtnClass = u.verified ? "bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white" : "bg-sky-500/20 text-sky-400 hover:bg-sky-500 hover:text-[#0B0F19]";
                     
                     tbody.innerHTML += `
@@ -1233,13 +1243,13 @@
                             </td>
                             <td class="py-3 px-2 font-bold text-amber-400">${u.points || 0}</td>
                             <td class="py-3 px-2">
-                                <button onclick="toggleVerify('${u.uid}', ${!u.verified})" class="px-3 py-1 rounded text-xs font-bold transition cursor-pointer ${verifyBtnClass}">
+                                <button onclick="toggleVerify('${u.uid}', ${!u.verified})" class="px-2.5 py-1 rounded text-[11px] font-bold transition cursor-pointer ${verifyBtnClass}">
                                     ${verifyBtnText}
                                 </button>
                             </td>
                             <td class="py-3 px-2">
-                                <button onclick="exportStudentReport('${u.uid}', '${u.name}')" class="bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white px-3 py-1 rounded text-xs font-bold transition cursor-pointer">
-                                    📥 تصدير السجل والعمليات
+                                <button onclick="exportStudentReport('${u.uid}', '${u.name}')" class="bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white px-2.5 py-1 rounded text-[11px] font-bold transition cursor-pointer">
+                                    📥 تصدير السجل
                                 </button>
                             </td>
                         </tr>`;
