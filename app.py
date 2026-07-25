@@ -1,34 +1,34 @@
 import streamlit as st
 import os
 
-# إعدادات الصفحة لتكون بعرض الشاشة بالكامل (wide)
+# إعدادات الصفحة
 st.set_page_config(page_title="منصة تنافس", layout="wide")
 
-# إزالة الهوامش الزائدة والتداخلات الخاصة بمنصة ستريمليت من الأعلى والجانبين
+# حقن CSS لإخفاء رأس ستريمليت الزائد ودفع المحتوى لأسفل قليلاً
 st.markdown("""
     <style>
         .block-container {
-            padding-top: 0rem !important;
-            padding-bottom: 0rem !important;
+            padding-top: 2rem !important;
             padding-left: 0rem !important;
             padding-right: 0rem !important;
         }
+        /* إخفاء شريط أدوات ستريمليت العلوي المزعج إن أمكن، أو إزاحة الـ iframe */
         iframe {
+            margin-top: 20px !important;
             width: 100vw !important;
-            height: 100vh !important;
+            height: 95vh !important;
             border: none !important;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# قراءة ملف الـ HTML من داخل مجلد templates
+# قراءة ملف الـ HTML
 template_path = os.path.join("templates", "index.html")
 
 if os.path.exists(template_path):
     with open(template_path, "r", encoding="utf-8") as f:
         html_code = f.read()
     
-    # عرض التصميم ليمتلئ بالشاشة بالكامل
-    st.components.v1.html(html_code, height=900, scrolling=True)
+    st.components.v1.html(html_code, height=950, scrolling=True)
 else:
     st.error("لم يتم العثور على ملف index.html داخل مجلد templates!")
