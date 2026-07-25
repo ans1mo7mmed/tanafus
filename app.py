@@ -12,6 +12,6 @@ if os.path.exists(template_path):
         html_code = f.read()
     
     # عرض التصميم داخل المنصة
-    st.components.v1.html(html_code, height=400, scrolling=False)
+    st.components.v1.html(html_code, height=750, scrolling=False)
 else:
     st.error("لم يتم العثور على ملف index.html داخل مجلد templates!")
